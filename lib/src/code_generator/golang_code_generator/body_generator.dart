@@ -4,8 +4,8 @@ import './converter/struct_converter.dart';
 abstract class BodyGenerator {
   final String _functionName;
   final List<List<String>> _paramList;
-
-  BodyGenerator(this._functionName, this._paramList);
+  final String _type;
+  BodyGenerator(this._functionName, this._paramList,this._type);
 
   String _generateCToGoStructStmnt(
           String goVariableName, String cVariableName, String type) =>
@@ -13,14 +13,14 @@ abstract class BodyGenerator {
 
   String getResult() {
     String temp = '';
-    String result = 'result := custompackage.$_functionName';
+    String result = '${_type == 'void'?'':'result :='} custompackage.$_functionName';
     result = '$result( ';
     for (var element in _paramList) { print(element);
       if (element.length > 1) {
        
         if (!cToGoDataType.containsKey(element[1])) {
           temp =
-              '${temp}go_${element[0]}:=${element[1].trim().substring(9)}{}\n${_generateCToGoStructStmnt('go_${element[0]}', element[0], element[1].trim().substring(9))}\n';
+              '${temp}go_${element[0]}:=custompackage.${element[1].trim().substring(10)}{}\n${_generateCToGoStructStmnt('go_${element[0]}', element[0], element[1].trim().substring(10))}\n';
         }
         result =
             '$result${cToGoDataType.containsKey(element[1].trim()) ? '${cToGoDataType[element[1]]}(${element[0].trim()}),' : 'go_${element[0].trim()},'}';

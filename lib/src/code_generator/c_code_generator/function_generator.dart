@@ -41,7 +41,7 @@ class CFunctionGenerator implements FunctionGenerator {
 
   @override
   String generateHeader() =>
-      '${generateReturnType()} ${funcPtr.ref.name.cast<Utf8>().toDartString()} (${generateParams()})\n';
+      '${generateReturnType()} C${funcPtr.ref.name.cast<Utf8>().toDartString()} (${generateParams()})\n';
 
   @override
   String generateParams() {
@@ -90,7 +90,7 @@ class CFunctionGenerator implements FunctionGenerator {
             .cast<Utf8>()
             .toDartString();
         params =
-            '$params${cParamType.containsKey(paramType) ? cParamType[paramType] : paramType} $paramName';
+            '$params${cParamType.containsKey(paramType) ? cParamType[paramType] : 'C$paramType'} $paramName';
       }
     }
     return params.trim();

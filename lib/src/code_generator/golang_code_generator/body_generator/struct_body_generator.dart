@@ -16,7 +16,7 @@ class StructBodyGenerator extends BodyGenerator {
   late List<List<String>> _paramList;
 
   StructBodyGenerator(this._functionName, this._paramList, this.type)
-      : super(_functionName, _paramList) {
+      : super(_functionName, _paramList,'struct') {
     structName = type.substring(10).trim();
     _cStructVariableName = 'cStruct';
     _goStructVariableName = 'result';

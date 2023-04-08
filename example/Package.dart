@@ -18,25 +18,109 @@ class PackageEg {
           lookup)
       : _lookup = lookup;
 
-  void Temp() {
-    return _Temp();
-  }
-
-  late final _TempPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function()>>('Temp');
-  late final _Temp = _TempPtr.asFunction<void Function()>();
-
-  ffi.Pointer<ffi.Int> Temp1(
-    ffi.Pointer<ffi.Char> a,
+  ffi.Pointer<ffi.Int> CPrintStruct(
+    CStructA struct_a,
   ) {
-    return _Temp1(
-      a,
+    return _CPrintStruct(
+      struct_a,
     );
   }
 
-  late final _Temp1Ptr = _lookup<
+  late final _CPrintStructPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Int> Function(CStructA)>>(
+          'CPrintStruct');
+  late final _CPrintStruct =
+      _CPrintStructPtr.asFunction<ffi.Pointer<ffi.Int> Function(CStructA)>();
+
+  void CHelloFromGolang(
+    CStructA x,
+  ) {
+    return _CHelloFromGolang(
+      x,
+    );
+  }
+
+  late final _CHelloFromGolangPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(CStructA)>>(
+          'CHelloFromGolang');
+  late final _CHelloFromGolang =
+      _CHelloFromGolangPtr.asFunction<void Function(CStructA)>();
+
+  ffi.Pointer<ffi.Int> CPrintStringInGolang(
+    ffi.Pointer<ffi.Char> s,
+  ) {
+    return _CPrintStringInGolang(
+      s,
+    );
+  }
+
+  late final _CPrintStringInGolangPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Pointer<ffi.Int> Function(ffi.Pointer<ffi.Char>)>>('Temp1');
-  late final _Temp1 = _Temp1Ptr.asFunction<
+          ffi.Pointer<ffi.Int> Function(
+              ffi.Pointer<ffi.Char>)>>('CPrintStringInGolang');
+  late final _CPrintStringInGolang = _CPrintStringInGolangPtr.asFunction<
       ffi.Pointer<ffi.Int> Function(ffi.Pointer<ffi.Char>)>();
+
+  ffi.Pointer<ffi.Int> CSum(
+    int a,
+    int b,
+  ) {
+    return _CSum(
+      a,
+      b,
+    );
+  }
+
+  late final _CSumPtr = _lookup<
+          ffi.NativeFunction<ffi.Pointer<ffi.Int> Function(ffi.Int, ffi.Int)>>(
+      'CSum');
+  late final _CSum =
+      _CSumPtr.asFunction<ffi.Pointer<ffi.Int> Function(int, int)>();
+
+  ffi.Pointer<ffi.Int> CMultiply(
+    int a,
+    int b,
+  ) {
+    return _CMultiply(
+      a,
+      b,
+    );
+  }
+
+  late final _CMultiplyPtr = _lookup<
+          ffi.NativeFunction<ffi.Pointer<ffi.Int> Function(ffi.Int, ffi.Int)>>(
+      'CMultiply');
+  late final _CMultiply =
+      _CMultiplyPtr.asFunction<ffi.Pointer<ffi.Int> Function(int, int)>();
+
+  ffi.Pointer<ffi.Int> CSubtraction(
+    int a,
+    int b,
+  ) {
+    return _CSubtraction(
+      a,
+      b,
+    );
+  }
+
+  late final _CSubtractionPtr = _lookup<
+          ffi.NativeFunction<ffi.Pointer<ffi.Int> Function(ffi.Int, ffi.Int)>>(
+      'CSubtraction');
+  late final _CSubtraction =
+      _CSubtractionPtr.asFunction<ffi.Pointer<ffi.Int> Function(int, int)>();
+}
+
+class CStructB extends ffi.Struct {
+  @ffi.Int()
+  external int A;
+
+  @ffi.Int()
+  external int B;
+}
+
+class CStructA extends ffi.Struct {
+  @ffi.Int()
+  external int A;
+
+  external CStructB B;
 }

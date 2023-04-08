@@ -8,7 +8,7 @@ class IntegerBodyGenerator extends BodyGenerator {
   final List<List<String>> _paramList;
 
   IntegerBodyGenerator(this._functionName, this._paramList)
-      : super(_functionName, _paramList);
+      : super(_functionName, _paramList,'int');
 
   String _allocateCMemory() => 'resultPtr := (*C.int)(C.malloc(C.sizeof_int))';
 

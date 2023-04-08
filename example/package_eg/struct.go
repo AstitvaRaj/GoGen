@@ -2,16 +2,16 @@ package mainss
 
 import "fmt"
 
-type structB struct {
-	a int
-	b int
+type StructB struct {
+	A int
+	B int
 }
-type structA struct {
-	a int
-	b structB
+type StructA struct {
+	A int
+	B StructB
 }
 
-func PrintStruct(struct_a structA) int {
+func PrintStruct(struct_a StructA) int {
 	fmt.Println(struct_a)
 	return 1
 }

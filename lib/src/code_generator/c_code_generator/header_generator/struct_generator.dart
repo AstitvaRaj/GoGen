@@ -34,7 +34,7 @@ class CHeaderStructGenerator {
         .ref
         .fieldStruct
         .cast<typeSpec>();
-    String structName = typeSpecs.ref.name.cast<Utf8>().toDartString();
+    String structName = 'C${typeSpecs.ref.name.cast<Utf8>().toDartString()}';
     fields = '$fields  struct $structName{ \n';
     cStructContainer[structName] = fieldMap;
     Pointer<structType> struct =
@@ -94,7 +94,7 @@ class CHeaderStructGenerator {
     String type = fieldPtr.cast<node>().ref.fieldStruct.cast<field>().ref.types.cast<node>().ref.fieldStruct.cast<ident>().ref.name.cast<Utf8>().toDartString();
 
     fieldData =
-        '${cParamType[type] ?? type} ${ptr.toDartString()} ;\n';
+        '${cParamType[type] ?? 'C$type'} ${ptr.toDartString()} ;\n';
     return fieldData;
   }
 }

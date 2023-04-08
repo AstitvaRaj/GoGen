@@ -6,16 +6,25 @@ import '../file_generator.dart';
 import 'GolangGenDeclGenerator.dart';
 import 'func_generator.dart';
 import 'import_generator.dart';
+import 'struct_info_container.dart';
 
 class GolangFileGenerator extends FileGenerator {
-  GolangFileGenerator(super.golangDirectory, super.pointer,{super.goModuleName});
+  GolangFileGenerator(super.golangDirectory, super.pointer,
+      {super.goModuleName});
 
   @override
   String getFileContent() {
     String fileData = '';
-    fileData = GolangImportGenerator(goModuleName: super.goModuleName).generateImportStmt();
+    fileData = GolangImportGenerator(goModuleName: super.goModuleName)
+        .generateImportStmt();
     Pointer<package> p = super.pointer.ref.fieldStruct.cast<package>();
     var fileList = p.ref.file.cast<Uint64>().asTypedList(p.ref.fileLen);
+    for (var element in fileList) {
+      _prepareType(Pointer.fromAddress(element).cast());
+    }
+    print("_____________________________________________________________________");
+    print(structMap);
+    print("_____________________________________________________________________");
     for (var element in fileList) {
       print(Pointer.fromAddress(element)
           .cast<node>()
@@ -29,6 +38,32 @@ class GolangFileGenerator extends FileGenerator {
 
     fileData = "$fileData\nfunc main(){}";
     return fileData;
+  }
+
+  void _prepareType(Pointer<node> nodes) {
+    String fileData = '';
+    var fileDecl = nodes.ref.fieldStruct
+        .cast<file>()
+        .ref
+        .decl
+        .cast<Uint64>()
+        .asTypedList(nodes.ref.fieldStruct.cast<file>().ref.declLen);
+
+    for (var s in fileDecl) {
+      switch (Pointer.fromAddress(s)
+          .cast<node>()
+          .ref
+          .kind
+          .cast<Utf8>()
+          .toDartString()) {
+        case "*ast.GenDecl":
+          fileData =
+              '$fileData ${GolangGenDeclGenerator(Pointer.fromAddress(s).cast<node>().ref.fieldStruct.cast<genDecl>()).generateDecl()}\n';
+          break;
+        default:
+          break;
+      }
+    }
   }
 
   String _singleFile(Pointer<node> nodes) {

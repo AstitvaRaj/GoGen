@@ -1,26 +1,27 @@
-#include "c_binding.h"
-#include "generated_dll.h"
-__declspec(dllexport) char *HelloFromGolang()
-{
-  return Go_HelloFromGolang();
+#include "go_generated_dll.h"
+  __declspec(dllexport)   int*  CPrintStruct (CStructA struct_a)
+ {
+return Go_PrintStruct(   struct_a);
 }
-__declspec(dllexport) void PrintStringInGolang(char *s)
-{
-  Go_PrintStringInGolang(s);
+  __declspec(dllexport) void CHelloFromGolang (CStructA x)
+ {
+ Go_HelloFromGolang(   x);
 }
-__declspec(dllexport) int *Sum(int a, int b)
-{
-  return Go_Sum(a, b);
+ __declspec(dllexport)   int*  CPrintStringInGolang (char* s)
+ {
+return Go_PrintStringInGolang(   s);
 }
-__declspec(dllexport) int *Multiply(int a, int b)
-{
-  return Go_Multiply(a, b);
+  __declspec(dllexport)   int*  CSum (int a,int b)
+ {
+return Go_Sum(   a, b);
 }
-__declspec(dllexport) int *Subtraction(int a, int b)
-{
-  return Go_Subtraction(a, b);
+ __declspec(dllexport)   int*  CMultiply (int a,int b)
+ {
+return Go_Multiply(   a, b);
 }
-__declspec(dllexport) int *PrintStruct(structA struct_a)
-{
-  return Go_PrintStruct(struct_a);
+ __declspec(dllexport)   int*  CSubtraction (int a,int b)
+ {
+return Go_Subtraction(   a, b);
 }
+
+int main(){return 0;}

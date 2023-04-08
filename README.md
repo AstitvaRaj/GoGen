@@ -11,29 +11,28 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+TODO: GoGen package is a dart package use for generating dart binding for go package.
 
 ## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+First configure pubsec.yaml for ffigen to generate dart binding. 'c_binding.h' file will will be use to generate the dart binding. So configure pubsec.yaml accordingly.
+To generate bindings use following code to generate binding.
+packagePath variable will contain a Full path of the golang package. 
 
 ```dart
-const like = 'sample';
+var packagePath = "D:\\Projects\\Dart Projects\\gsoc23sample\\go_gen\\example\\package_eg";
+GenerateBinding(packagePath: packagePath).start(); 
 ```
 
-## Additional information
+Generated Library name will be 'go_project.dll' so to use golang package from dart, go_project.dll file must be imported.
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+```dart
+DynamicLibrary library = DynamicLibrary.open('./golangDirectory/go_project.dll');
+```
+
+## Note
+
+This is a prototype for GSOC23 project. Hence this package have following restrictions:
+1. This package can take Int, String and Struct data type as
+an argument and additionally void as a return data type.
+2. This package cannot take a pointer as an argument and
+Custom structures should also follow this rule.

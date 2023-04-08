@@ -1,20 +1,24 @@
+  
+ typedef   struct CStructB{ 
+ int A ;
+ int B ;
+ }CStructB;
 
-char *HelloFromGolang();
-void PrintStringInGolang(char *s);
-int *Sum(int a, int b);
-int *Multiply(int a, int b);
-int *Subtraction(int a, int b);
+ typedef   struct CStructA{ 
+ int A ;
+ CStructB B ;
+ }CStructA;
 
-typedef struct structB
-{
-    int a;
-    int b;
-} structB;
-
-typedef struct structA
-{
-    int a;
-    structB b;
-} structA;
-
-int *PrintStruct(structA struct_a);
+  
+     int*  CPrintStruct (CStructA struct_a)
+ ;
+  void CHelloFromGolang (CStructA x)
+ ;
+   int*  CPrintStringInGolang (char* s)
+ ;
+    int*  CSum (int a,int b)
+ ;
+   int*  CMultiply (int a,int b)
+ ;
+   int*  CSubtraction (int a,int b)
+ ;

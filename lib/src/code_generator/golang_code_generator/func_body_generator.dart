@@ -1,6 +1,7 @@
 import 'body_generator/integer_body_generator.dart';
 import 'body_generator/string_body_generator.dart';
 import 'body_generator/struct_body_generator.dart';
+import 'body_generator/void_body_generator.dart';
 
 class GolangFunctionBodyGenerator {
   late String _functionName;
@@ -30,6 +31,10 @@ class GolangFunctionBodyGenerator {
   String _structTypeBody() =>
       StructBodyGenerator(_functionName, _paramList, _returnType)
           .generateBody();
+  
+  String _voidTypeBody() =>
+      VoidBodyGenerator(_functionName, _paramList)
+          .generateBody();
 
   String generateBody() {
     switch (_returnType) {
@@ -37,6 +42,8 @@ class GolangFunctionBodyGenerator {
         return _intTypeBody();
       case '*C.char':
         return _stringTypeBody();
+      case 'void':
+        return _voidTypeBody();
       default:
         return _structTypeBody();
     }

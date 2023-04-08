@@ -4,6 +4,7 @@ import 'dart:io';
 import '../parser/ast_parser.dart';
 
 abstract class FileGenerator {
+
   late String golangDirectory;
 
   late Pointer<node> pointer;

@@ -7,7 +7,7 @@ class StringBodyGenerator extends BodyGenerator {
   final List<List<String>> _paramList;
 
   StringBodyGenerator(this._functionName, this._paramList)
-      : super(_functionName, _paramList);
+      : super(_functionName, _paramList,'string');
 
   String _returnResult() => 'return ${StringConverter().goToC('result')}';
 

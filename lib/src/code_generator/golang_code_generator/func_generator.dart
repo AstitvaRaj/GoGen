@@ -35,12 +35,11 @@ class GolangFunctionGenerator implements FunctionGenerator {
   }
 
   @override
-  String generateFunction() => generateHeader()  + generateBody();
+  String generateFunction() => generateHeader() + generateBody();
 
   @override
   String generateHeader() =>
-      '//export Go_${funcPtr.ref.name.cast<Utf8>().toDartString()}\nfunc Go_${funcPtr.ref.name.cast<Utf8>().toDartString()}(${generateParams()}) (${generateReturnType()}){\n';
-      
+      '//export Go_${funcPtr.ref.name.cast<Utf8>().toDartString()}\nfunc Go_${funcPtr.ref.name.cast<Utf8>().toDartString()}(${generateParams()}) (${generateReturnType() == 'void' ? '' : generateReturnType()}){\n';
 
   @override
   String generateParams() {
@@ -89,7 +88,7 @@ class GolangFunctionGenerator implements FunctionGenerator {
             .cast<Utf8>()
             .toDartString();
         params =
-            '$params $paramName ${paramDataTypes.containsKey(paramType) ? paramDataTypes[paramType] : 'C.struct_$paramType'}';
+            '$params $paramName ${paramDataTypes.containsKey(paramType) ? paramDataTypes[paramType] : 'C.struct_C$paramType'}';
       }
     }
     return params;
@@ -101,7 +100,7 @@ class GolangFunctionGenerator implements FunctionGenerator {
   @override
   String generateReturnType() {
     if (funcTypePtr.ref.results == nullptr) {
-      return "";
+      return "void";
     }
     int returnValues = funcTypePtr.ref.results
         .cast<node>()
@@ -151,7 +150,7 @@ class GolangFunctionGenerator implements FunctionGenerator {
               .toDartString();
 
           results =
-              ' $results ${returnDataTypes.containsKey(paramType) ? returnDataTypes[paramType] : '*C.struct_$paramType'} ';
+              ' $results ${returnDataTypes.containsKey(paramType) ? returnDataTypes[paramType] : '*C.struct_C$paramType'} ';
         }
         return results;
       default:

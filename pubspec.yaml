@@ -20,4 +20,4 @@ ffigen:
   output: 'example\Package.dart'
   headers:
     entry-points:
-      - 'golangDirectory\gen.h'
+      - 'golangDirectory\c_binding.h'

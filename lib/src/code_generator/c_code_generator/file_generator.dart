@@ -25,7 +25,7 @@ class CFileGenerator extends FileGenerator {
       fileData =
           '$fileData ${_singleFile(Pointer.fromAddress(element).cast())}';
     }
-    return fileData;
+    return '$fileData\nint main(){return 0;}';
   }
 
   String _singleFile(Pointer<node> nodes) {

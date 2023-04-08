@@ -48,6 +48,7 @@ class GenerateBinding {
     golangFileGenerator.createFile(_goFileName);
     cHeaderFileGenerator.createFile(_cFileName);
 
-    // CommandsExecute().generateDynamicLibrary(_filePath, _getGolangModuleName());
+    CommandsExecute()
+        .generateDynamicLibrary(_packagePath, _getGolangModuleName());
   }
 }

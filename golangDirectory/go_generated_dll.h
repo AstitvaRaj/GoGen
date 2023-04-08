@@ -20,7 +20,7 @@ typedef struct { const char *p; ptrdiff_t n; } _GoString_;
 
 
 #line 3 "golang_bindings.go"
-#include "c_binding.h" 
+#include "c_binding.h"
 #include<stdlib.h>
 
 #line 1 "cgo-generated-wrapper"
@@ -79,8 +79,12 @@ typedef struct { void *data; GoInt len; GoInt cap; } GoSlice;
 extern "C" {
 #endif
 
-extern __declspec(dllexport) int* Go_Temp1(char* a);
-extern __declspec(dllexport) void Go_Temp();
+extern __declspec(dllexport) int* Go_PrintStruct(struct CStructA struct_a);
+extern __declspec(dllexport) void Go_HelloFromGolang(struct CStructA x);
+extern __declspec(dllexport) int* Go_PrintStringInGolang(char* s);
+extern __declspec(dllexport) int* Go_Sum(int a, int b);
+extern __declspec(dllexport) int* Go_Multiply(int a, int b);
+extern __declspec(dllexport) int* Go_Subtraction(int a, int b);
 
 #ifdef __cplusplus
 }
